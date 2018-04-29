@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="default">
+    <head>
+        <title>Tic Tac Toe Game</title>
+        <link rel="stylesheet" href="/css/tictactoe.css"/>
+    </head>
+	<body>
+		<div layout:fragment="menu">
+		    <!-- <p th:text="'The game stage is ' + ${gameState.gameStage.name()}">Blah</p> -->
+ 			<div th:if="${gameState.gameStage.name() == 'MODE_SELECTION'}">
+ 				<p></p>
+ 				<p>Would you like to play against the computer, or another human?</p>
+ 				<p></p>
+ 				<div class="container">
+ 					<div class="row">
+ 						<div class="col-md-1">
+     						<a href="/tictactoe/modeselection?mode=ai" class="btn btn-default" role="button">Computer</a>
+ 						</div>
+ 						<div class="col-md-1">
+     						<a href="/tictactoe/modeselection?mode=twoplayer" class="btn btn-default" role="button">Human</a>
+ 						</div>
+ 					</div>
+ 				</div>
+ 			</div>
+ 			<div th:if="${gameState.gameStage.name() == 'IN_GAME'}">
+ 				<p> </p>
+ 				<p> </p>
+ 				<p> </p>
+ 				<div class="container">
+ 					<div class="col-md-2">
+		    			<p class="turn-message" th:text="${gameState.turnMessage}">Message</p>
+ 					</div>
+ 				</div>
+ 			</div>
+ 			<div th:if="${gameState.gameStage.name() == 'POST_GAME'}">
+ 				<p> </p>
+ 				<p> </p>
+ 				<p> </p>
+ 				<div class="container">
+ 					<div class="col-md-2">
+		    			<p class="game-message" th:text="${gameState.gameMessage}">Message</p>
+ 					</div>
+ 				</div>
+ 			</div>
+		</div>
+		<div layout:fragment="content">
+ 			<h1>Welcome to Tic Tac Toe!</h1>
+ 			<p></p>
+ 			<div class="game-board">
+ 				<div class="box" th:text="${gameState.board.markAt(0,0)}" onclick="document.location.href = '/tictactoe/move?row=0&col=0'; return false">?</div>
+ 				<div class="box" th:text="${gameState.board.markAt(0,1)}" onclick="document.location.href = '/tictactoe/move?row=0&col=1'; return false">?</div>
+ 				<div class="box" th:text="${gameState.board.markAt(0,2)}" onclick="document.location.href = '/tictactoe/move?row=0&col=2'; return false">?</div>
+ 				<div class="box" th:text="${gameState.board.markAt(1,0)}" onclick="document.location.href = '/tictactoe/move?row=1&col=0'; return false">?</div>
+ 				<div class="box" th:text="${gameState.board.markAt(1,1)}" onclick="document.location.href = '/tictactoe/move?row=1&col=1'; return false">?</div>
+ 				<div class="box" th:text="${gameState.board.markAt(1,2)}" onclick="document.location.href = '/tictactoe/move?row=1&col=2'; return false">?</div>
+ 				<div class="box" th:text="${gameState.board.markAt(2,0)}" onclick="document.location.href = '/tictactoe/move?row=2&col=0'; return false">?</div>
+ 				<div class="box" th:text="${gameState.board.markAt(2,1)}" onclick="document.location.href = '/tictactoe/move?row=2&col=1'; return false">?</div>
+ 				<div class="box" th:text="${gameState.board.markAt(2,2)}" onclick="document.location.href = '/tictactoe/move?row=2&col=2'; return false">?</div>
+    		</div>
+ 			<p></p>
+			<p><a href="/tictactoe/new">New game</a></p>
+ 			<p></p>
+			<p><a href="/tictactoe/reset">Start over</a></p>
+    	</div>
+	</body>
+    <th:block layout:fragment="scripts">
+        <script src="/js/tictactoe.js"></script>
+    </th:block>
+</html>
